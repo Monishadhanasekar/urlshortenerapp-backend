@@ -15,15 +15,9 @@ app.get('/', (req, res) => {
 });
 
 app.post('/short', async (req, res) => {
-  const found = await shortUrl.find({full: req.body.full});
-  if(found.length>0){
-    res.send(found);
-  }
-  else{
     await shortUrl.create({full: req.body.full});
     const foundNow = await shortUrl.find({full: req.body.full});
     res.send(foundNow);
-  }
 });
 
 app.get('/:shortUrl', async (req, res) => {
